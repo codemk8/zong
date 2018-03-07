@@ -11,15 +11,15 @@ import (
 	golangswaggerpaths "path"
 )
 
-// GetAPIURL generates an URL for the get API operation
-type GetAPIURL struct {
+// GetServiceURL generates an URL for the get service operation
+type GetServiceURL struct {
 	_basePath string
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetAPIURL) WithBasePath(bp string) *GetAPIURL {
+func (o *GetServiceURL) WithBasePath(bp string) *GetServiceURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -27,15 +27,15 @@ func (o *GetAPIURL) WithBasePath(bp string) *GetAPIURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetAPIURL) SetBasePath(bp string) {
+func (o *GetServiceURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *GetAPIURL) Build() (*url.URL, error) {
+func (o *GetServiceURL) Build() (*url.URL, error) {
 	var result url.URL
 
-	var _path = "/api"
+	var _path = "/service"
 
 	_basePath := o._basePath
 	if _basePath == "" {
@@ -47,7 +47,7 @@ func (o *GetAPIURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *GetAPIURL) Must(u *url.URL, err error) *url.URL {
+func (o *GetServiceURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -58,17 +58,17 @@ func (o *GetAPIURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *GetAPIURL) String() string {
+func (o *GetServiceURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *GetAPIURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *GetServiceURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on GetAPIURL")
+		return nil, errors.New("scheme is required for a full url on GetServiceURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on GetAPIURL")
+		return nil, errors.New("host is required for a full url on GetServiceURL")
 	}
 
 	base, err := o.Build()
@@ -82,6 +82,6 @@ func (o *GetAPIURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *GetAPIURL) StringFull(scheme, host string) string {
+func (o *GetServiceURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

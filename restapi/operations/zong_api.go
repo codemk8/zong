@@ -38,8 +38,8 @@ func NewZongAPI(spec *loads.Document) *ZongAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
-		GetAPIHandler: GetAPIHandlerFunc(func(params GetAPIParams) middleware.Responder {
-			return middleware.NotImplemented("operation GetAPI has not yet been implemented")
+		GetServiceHandler: GetServiceHandlerFunc(func(params GetServiceParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetService has not yet been implemented")
 		}),
 		APISelfCheckHandler: api.SelfCheckHandlerFunc(func(params api.SelfCheckParams) middleware.Responder {
 			return middleware.NotImplemented("operation APISelfCheck has not yet been implemented")
@@ -76,8 +76,8 @@ type ZongAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
-	// GetAPIHandler sets the operation handler for the get API operation
-	GetAPIHandler GetAPIHandler
+	// GetServiceHandler sets the operation handler for the get service operation
+	GetServiceHandler GetServiceHandler
 	// APISelfCheckHandler sets the operation handler for the self check operation
 	APISelfCheckHandler api.SelfCheckHandler
 	// StatusStatusHandler sets the operation handler for the status operation
@@ -145,8 +145,8 @@ func (o *ZongAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.GetAPIHandler == nil {
-		unregistered = append(unregistered, "GetAPIHandler")
+	if o.GetServiceHandler == nil {
+		unregistered = append(unregistered, "GetServiceHandler")
 	}
 
 	if o.APISelfCheckHandler == nil {
@@ -250,7 +250,7 @@ func (o *ZongAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/api"] = NewGetAPI(o.context, o.GetAPIHandler)
+	o.handlers["GET"]["/service"] = NewGetService(o.context, o.GetServiceHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)

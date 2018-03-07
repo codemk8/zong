@@ -54,10 +54,10 @@ paths:
       responses:
         default:
           description: "successful operation"
-  /api:
+  /service:
     get:
-      summary: "Get status of an API"
-      operationId: "getAPI"
+      summary: "Get status of an API service"
+      operationId: "getService"
       produces:
       - "application/json"
       responses:

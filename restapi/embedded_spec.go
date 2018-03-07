@@ -65,13 +65,13 @@ func init() {
         }
       }
     },
-    "/api": {
+    "/service": {
       "get": {
         "produces": [
           "application/json"
         ],
-        "summary": "Get status of an API",
-        "operationId": "getAPI",
+        "summary": "Get status of an API service",
+        "operationId": "getService",
         "responses": {
           "default": {
             "description": "successful operation"
