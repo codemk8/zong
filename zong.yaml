@@ -1,0 +1,116 @@
+swagger: "2.0"
+info:
+  description: "Zong Restful Server"
+  version: "1.0.0"
+  title: "Zong "
+  termsOfService: "https://codemk8.io/terms/"
+  contact:
+    email: "help@codemk8.io"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "localhost"
+basePath: "/v2"
+tags:
+- name: "API"
+  description: "Everything about API"
+  externalDocs:
+    description: "Find out more"
+    url: "https://codemk8.io"
+schemes:
+- "http"
+paths:
+  /:
+    get:
+      tags:
+      - "API"
+      summary: "Status of System"
+      description: ""
+      operationId: "selfCheck"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "System Spec"
+        required: true
+        schema:
+          $ref: "#/definitions/System"
+      responses:
+        405:
+          description: "Invalid input"
+  /status:
+    get:
+      tags:
+      - "status"
+      summary: "API Status"
+      description: ""
+      operationId: "status"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+  /api:
+    get:
+      summary: "Get status of an API"
+      operationId: "getAPI"
+      produces:
+      - "application/json"
+      responses:
+        default:
+          description: "successful operation"
+securityDefinitions:
+  apikey:
+   type: "apiKey"
+   name: "api_key"
+   in: "header"
+definitions:
+  API:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      created:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int32"
+        description: "API Status"
+    xml:
+      name: "User"
+  System:
+    type: "object"
+    required:
+    - "size"
+    properties:
+      size:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      status:
+        type: "string"
+        description: "explain..."
+        enum:
+        - "available"
+        - "pending"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
